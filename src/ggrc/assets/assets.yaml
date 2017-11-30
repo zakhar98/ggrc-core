@@ -141,14 +141,10 @@ dashboard-js-template-files:
   - components/custom-attributes/custom-attributes-field.mustache
   - components/custom-attributes/custom-attributes-field-view.mustache
   - components/object-tasks/object-tasks.mustache
-  - components/advanced-search/advanced-search-filter-container.mustache
-  - components/advanced-search/advanced-search-filter-attribute.mustache
-  - components/advanced-search/advanced-search-filter-group.mustache
-  - components/advanced-search/advanced-search-filter-operator.mustache
-  - components/advanced-search/advanced-search-filter-state.mustache
-  - components/advanced-search/advanced-search-mapping-container.mustache
+
   - components/advanced-search/advanced-search-mapping-group.mustache
   - components/advanced-search/advanced-search-mapping-criteria.mustache
+
   - custom_attributes/modal_content.mustache
   - custom_attributes/info.mustache
   - custom_attribute_definitions/modal_content.mustache
