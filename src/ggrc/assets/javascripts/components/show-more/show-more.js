@@ -11,10 +11,10 @@
  *          <some-item-component></some-item-component>
  *        </show-more>
  */
-(function (GGRC, can) {
-  var template = can.view(GGRC.mustache_path +
-    '/components/show-more/show-more.mustache');
 
+import template from './show-more.mustache';
+
+(function (GGRC, can) {
   GGRC.Components('showMore', {
     tag: 'show-more',
     template: template,

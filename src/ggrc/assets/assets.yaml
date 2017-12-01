@@ -2,28 +2,11 @@
 # Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 
 dashboard-js-template-files:
-  - components/object-selection/object-selection-item.mustache
-  - components/mapping-controls/mapping-type-selector.mustache
-  - components/effective-dates/effective-dates.mustache
-  - components/read-more/read-more.mustache
-  - components/collapsible-panel/collapsible-panel.mustache
-  - components/collapsible-panel/collapsible-panel-body.mustache
-  - components/collapsible-panel/collapsible-panel-header.mustache
-  - components/gca-controls/gca-controls.mustache
 
-  - components/object-popover/object-popover.mustache
-  - components/object-popover/related-assessment-popover.mustache
-  - components/object-list-item/detailed-business-object-list-item.mustache
-  - components/object-list-item/business-object-list-item.mustache
-  - components/object-list-item/comment-list-item.mustache
-  - components/object-list-item/person-list-item.mustache
   - components/object-list-item/document-object-list-item.mustache
-  - components/mapped-objects/mapped-objects.mustache
-  - components/related-objects/related-issues.mustache
   - components/reusable-objects/reusable-objects-item.mustache
   - components/ca-object/ca-object-modal-content.mustache
-  - components/show-more/show-more.mustache
-  - components/show-related-assessments-button/show-related-assessments-button.mustache
+
   - components/view-object-buttons/view-object-buttons.mustache
   - components/add-object-button/add-object-button.mustache
   - components/info-pin-buttons/info-pin-buttons.mustache
@@ -250,11 +233,6 @@ dashboard-js-template-files:
   - snapshots/tree_add_item.mustache
   - components/object-list-item/editable-document-object-list-item.mustache
 
-  - components/people/deletable-people-group.mustache
-  - components/people/editable-people-group.mustache
-  - components/people/people-list-info.mustache
-  - components/people/editable-people-group-header.mustache
-  - components/custom-roles/custom-roles.mustache
   - components/inline/inline.mustache
   - components/inline/readonly-inline-content.mustache
   - components/inline/simple-readonly-text.mustache
