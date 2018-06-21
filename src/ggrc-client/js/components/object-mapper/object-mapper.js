@@ -66,6 +66,7 @@ import {
     Audit: 'Product',
     RiskAssessment: 'Program',
     TaskGroup: 'Control',
+    TechnologyEnvironment: 'Product',
   };
 
   let getDefaultType = function (type, object) {

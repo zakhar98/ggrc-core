@@ -39,6 +39,7 @@ describe('GGRC.Mappings', function () {
         'System',
         'Vendor',
         'Risk',
+        'TechnologyEnvironment',
         'Threat',
       ],
       notMappable: ['AssessmentTemplate', 'Evidence'],
@@ -127,6 +128,7 @@ describe('GGRC.Mappings', function () {
     System: filtered,
     TaskGroup: _.difference(filtered, ['Audit', 'Person',
       'TaskGroup', 'Workflow', 'Assessment', 'Document']),
+    TechnologyEnvironment: filtered,
     Threat: filtered,
     Vendor: filtered,
   };

@@ -29,7 +29,7 @@ import {
         'related_data_assets', 'related_facilities', 'related_markets',
         'related_org_groups', 'related_vendors', 'related_processes',
         'related_products', 'related_projects', 'related_systems',
-        'related_metrics',
+        'related_metrics', 'related_technology_environments',
       ]),
       related_and_able_objects: Multi([
         'objectives', 'related_business_objects',
@@ -90,6 +90,7 @@ import {
           'Standard', 'Program', 'Issue', 'Control', 'Section', 'Clause',
           'Objective', 'Audit', 'Assessment', 'AssessmentTemplate',
           'AccessGroup', 'Risk', 'Threat', 'Document', 'Metric',
+          'TechnologyEnvironment',
         ],
       },
       related_objects_as_source: Proxy(
@@ -118,6 +119,8 @@ import {
       related_assessments: TypeFilter('related_objects', 'Assessment'),
       related_risks: TypeFilter('related_objects', 'Risk'),
       related_threats: TypeFilter('related_objects', 'Threat'),
+      related_technology_environments: TypeFilter('related_objects',
+        'TechnologyEnvironment'),
       regulations: TypeFilter('related_objects', 'Regulation'),
       contracts: TypeFilter('related_objects', 'Contract'),
       policies: TypeFilter('related_objects', 'Policy'),
@@ -236,13 +239,17 @@ import {
     Process: {
       _mixins: ['business_object'],
     },
+    TechnologyEnvironment: {
+      _mixins: ['business_object'],
+    },
     Person: {
       _canonical: {
         related_objects: [
           'Program', 'Regulation', 'Contract', 'Policy', 'Standard',
           'AccessGroup', 'Objective', 'Control', 'Section', 'Clause',
           'DataAsset', 'Facility', 'Market', 'Metric', 'OrgGroup', 'Vendor',
-          'Process', 'Product', 'Project', 'System', 'Issue', 'Risk', 'Threat'],
+          'Process', 'Product', 'Project', 'System', 'Issue', 'Risk', 'Threat',
+          'TechnologyEnvironment'],
         authorizations: 'UserRole',
       },
       owned_programs: Indirect('Program', 'contact'),
@@ -267,6 +274,8 @@ import {
       owned_systems: Indirect('System', 'contact'),
       owned_risks: Indirect('Risk', 'contact'),
       owned_threats: Indirect('Threat', 'contact'),
+      owned_technology_environments: Indirect('TechnologyEnvironment',
+        'contact'),
       related_objects: Proxy(
         null, 'personable', 'ObjectPerson', 'person', 'object_people'),
       related_programs: TypeFilter('related_objects', 'Program'),
@@ -292,6 +301,8 @@ import {
       related_issues: TypeFilter('related_objects', 'Issue'),
       related_risks: TypeFilter('related_objects', 'Risk'),
       related_threats: TypeFilter('related_objects', 'Threat'),
+      related_technology_environments: TypeFilter('related_objects',
+        'TechnologyEnvironment'),
       authorizations: Direct('UserRole', 'person', 'user_roles'),
       programs_via_authorizations:
         Cross('authorizations', 'program_via_context'),
@@ -321,6 +332,9 @@ import {
       extended_related_products: Multi(['related_products', 'owned_products']),
       extended_related_projects: Multi(['related_projects', 'owned_projects']),
       extended_related_systems: Multi(['related_systems', 'owned_systems']),
+      extended_related_technology_environments:
+        Multi(['related_technology_environments',
+          'owned_technology_environments']),
       related_objects_via_search: Search(function (binding) {
         let types = this.observe_types;
 
@@ -339,7 +353,7 @@ import {
       }, 'Program,Regulation,Contract,Policy,Standard,Section,Clause,' +
         'Objective,Control,System,Process,DataAsset,AccessGroup,Product,' +
         'Project,Facility,Market,Metric,OrgGroup,Vendor,' +
-        'Audit,Assessment,Issue,Risk,Threat'),
+        'Audit,Assessment,Issue,Risk,Threat,TechnologyEnvironment'),
       extended_related_programs_via_search:
         TypeFilter('related_objects_via_search', 'Program'),
       extended_related_regulations_via_search:
@@ -390,6 +404,8 @@ import {
         TypeFilter('related_objects_via_search', 'Risk'),
       extended_related_threats_via_search:
         TypeFilter('related_objects_via_search', 'Threat'),
+      extended_related_technology_environments_via_search:
+        TypeFilter('related_objects_via_search', 'TechnologyEnvironment'),
     },
     Context: {
       _canonical: {
