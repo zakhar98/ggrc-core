@@ -67,6 +67,8 @@ export default can.Component.extend('richText', {
             },
           },
         });
+        let keyboard = editor.getModule('keyboard');
+        delete keyboard.bindings[9];
         this.setContentToEditor(editor, this.attr('content'));
 
         if (this.attr('maxLength')) {

@@ -82,7 +82,7 @@ export default can.Component.extend({
   events: {
     inserted: function () {
       let viewModel = this.viewModel;
-      let element = this.element.find('.datepicker__calendar');
+      let element = this.element.find('.datepicker__input');
       let minDate;
       let maxDate;
       let date;

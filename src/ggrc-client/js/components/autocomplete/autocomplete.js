@@ -65,7 +65,7 @@ let component = {
       // If the input still has focus after selecting an item, search results
       // do not appear unless user clicks out and back in the input (or
       // starts typing). Removing the focus spares one unnecessary click.
-      $el.find('input').blur();
+      //$el.find('input').blur();
     },
   },
 };

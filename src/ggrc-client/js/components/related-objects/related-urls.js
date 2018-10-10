@@ -64,6 +64,12 @@ export default can.Component.extend({
         inputElements[0].focus();
       }
     },
+    moveFocusToButton: function () {
+      let buttonElements = this.element.find('button');
+      if (buttonElements.length) {
+        buttonElements[0].focus();
+      }
+    },
     /**
      * @description Validates user input
      *
@@ -89,6 +95,8 @@ export default can.Component.extend({
       }
       if (isVisible) {
         this.moveFocusToInput();
+      } else {
+        this.moveFocusToButton();
       }
     },
     /**

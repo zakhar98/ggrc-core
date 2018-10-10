@@ -288,7 +288,7 @@ import Mappings from '../models/mappers/mappings';
   function preloadContent() {
     let template =
       ['<div class="modal-header">',
-        '<a class="pull-right modal-dismiss" href="#" data-dismiss="modal">',
+        '<a class="pull-right modal-dismiss tabbable" href="#" data-dismiss="modal">',
         '<i class="fa fa-times black"></i>',
         '</a>',
         '<h2>Loading...</h2>',
@@ -595,4 +595,60 @@ import Mappings from '../models/mappers/mappings';
       GGRC.register_modal_hook(toggle, launchFn);
     });
   });
+
+  function focusNext($tabbable, index) {
+    index = index === $tabbable.length-1 ? 0 : index + 1;
+    for (let i = index; i < $tabbable.length; i++) {
+      if ($($tabbable[i]).is('a, button, :input, [tabindex], :visible, .tabbable')) {
+        $tabbable[i].focus();
+        return;
+      }
+      if (i === $tabbable.length-1) {
+        i = -1;
+      }
+    }
+  }
+
+  function focusPrev($tabbable, index) {
+    index = index === 0 ? $tabbable.length-1 : index - 1;
+    for (let i = index; i >= 0; i--) {
+      if ($($tabbable[i]).is('a, button, :input, [tabindex], :visible, .tabbable')) {
+        $tabbable[i].focus();
+        return;
+      }
+      if (i === 0) {
+        i = $tabbable.length;
+      }
+    }
+  }
+
+  window.addEventListener('keydown', function (event) {
+    if (event.keyCode === 9) {
+      event.preventDefault();
+    }
+  });
+
+  window.addEventListener('keyup', (event) => {
+    if (event.keyCode === 9) {
+      let $tabbable = null;
+      let $current = $( document.activeElement );
+      let $parent = $current.closest('.tab-parent, body, .ggrc_controllers_modals');
+      console.log($parent);
+      $tabbable = $parent.find('.ql-editor, .ui-autocomplete-input, .tabbable, .input-block-level, select');
+      console.log($tabbable);
+      for (let i = 0; i < $tabbable.length; i++) {
+        if ($tabbable[i] === $current[0]) {
+          console.log($tabbable[i]);
+          if (event.shiftKey) {
+            focusPrev($tabbable, i);
+            break;
+          } else {
+            focusNext($tabbable, i);
+            break;
+          }
+        }
+      }
+      event.stopPropagation();
+    }
+  }, true);
 })(window.can, window.can.$, window.GGRC);
