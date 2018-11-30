@@ -42,3 +42,5 @@ export {default as TechnologyEnvironment} from './technology-environment';
 export {default as Threat} from './threat';
 export {default as Vendor} from './vendor';
 export {default as Workflow} from './workflow';
+
+export {default as CustomAttributable} from '../custom-attributes/custom-attributable';

@@ -4,7 +4,7 @@
 }}
 
 <header class="header tree-header flex-box {{cssClasses}}">
-  <tree-header-selector class="tree-header-selector">
+  <tree-header-selector class="tree-header-selector {{#if isAdminPage}}twc-admin-header{{/if}}">
     {{^if disableConfiguration}}
     <a href="#" class="dropdown-toggle tview-dropdown-toggle visible-columns-icon"
       data-toggle="dropdown" ($click)="initializeColumns()">

@@ -5,14 +5,17 @@
 
 <div class="{{cssClasses}}">
   {{#if isOpen}}
-    {{#directlyItems}}
-      <sub-tree-item class="tree-item-element"
-                     extra-css="directly-related"
-                     {instance}="."
-                     {limit-depth-tree}="limitDepthTree"
-      ></sub-tree-item>
-    {{/directlyItems}}
-
+  {{^if isAdminPage}}
+      {{#directlyItems}}
+        <sub-tree-item class="tree-item-element"
+                      extra-css="directly-related"
+                      {instance}="."
+                      {limit-depth-tree}="limitDepthTree"
+        ></sub-tree-item>
+      {{/directlyItems}}
+  {{else}}
+    <sub-tree-ca-items></sub-tree-ca-items>
+  {{/if}}
     {{#if showMore}}
       <div class="sub-tree-link">
         <a href="{{showAllRelatedLink}}" target="_blank">

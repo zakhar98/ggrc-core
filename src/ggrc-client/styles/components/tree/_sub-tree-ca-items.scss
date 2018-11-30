@@ -1,0 +1,68 @@
+.sub-tree-ca {
+    padding-top: 20px;
+    padding-right: 32px;
+    padding-bottom: 8px;
+    &__columns {
+        font-weight: bold;
+        color: black;
+    }
+    &__row {
+        padding-top: 10px;
+        border-top: 1px solid #e0e0e0;
+    }
+    &__actions a {
+        transition: color 0.2s ease;
+        color: #999;
+        i {
+            opacity: 0.4;
+            transition: opacity 0.2s ease;
+        }
+        &:hover {
+            color: #000;
+            text-decoration: none;
+            i {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+tree-widget-container tree-view.twc-admin div.attr-cell {
+    height: 40px;
+}
+.widget.dashboard_widgets.default.treeview {
+    h2 {
+        margin-left: 40px;
+    }
+}
+
+.twc-admin {
+    .tree-item-wrapper {
+        .open-item {
+            width: 20px;
+            padding-left: 15px;
+            opacity: 0.25;
+        }
+        .openclose {
+            width: 20px;
+            padding-left: 15px;
+            opacity: 0.25;
+        }
+        &.open-item {
+            .oopen-item, .openclose {
+                opacity: 1;
+                .fa-caret-right:before {
+                    content: "\F0D7";
+                }
+            }
+        }
+    }
+}
+
+tree-header .tree-header tree-header-selector.twc-admin-header {
+    min-width: 5px;
+}
+
+tree-view.twc-admin .tree-item-content{
+    font-size: 14.4px !important;
+}

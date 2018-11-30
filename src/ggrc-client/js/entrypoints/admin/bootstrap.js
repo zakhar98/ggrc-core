@@ -167,8 +167,7 @@ new WidgetList('ggrc_admin', {
       widget_id: 'custom_attribute',
       widget_name: 'Custom Attributes',
       widget_icon: 'workflow',
-      content_controller: TreeView,
-      content_controller_selector: 'ul',
+      widgetType: 'treeview',
       model: CustomAttributable,
       widget_initial_content:
       '<ul' +

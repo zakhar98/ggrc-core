@@ -15,6 +15,16 @@ import {getCustomAttributableModels} from '../../plugins/utils/models-utils';
   *
   */
 export default Cacheable('CMS.Models.CustomAttributable', {
+  root_object: 'custom_attributable',
+  tree_view_options: {
+    attr_list: [{
+      attr_title: 'OBJECT TYPE',
+      attr_name: 'title',
+      attr_type: 'admin',
+      disable_sorting: true,
+    }],
+    attr_view: GGRC.mustache_path + '/base_objects/tree-item-attr.mustache',
+  },
   findAll: function () {
     let types = _.orderBy(getCustomAttributableModels(),
       'category', false);

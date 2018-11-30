@@ -5,6 +5,7 @@
 
 <div class="flex-box flex-col {{cssClasses}}">
   <div class="flex-box flex-col header tree-header-content">
+  {{^if isAdminPage}}
     <div class="flex-box tree-filter">
       <tree-filter-input class="flex-size-1"
                          {register-filter}="@registerFilter"
@@ -77,6 +78,7 @@
         </div>
       </div>
     </simple-modal>
+  {{/if}}
 
     <tree-header {selected-columns}="columns.selected"
                  {available-columns}="columns.available"
@@ -98,11 +100,13 @@
              {parent-instance}="parent_instance"
              {model}="model"
              {get-depth-filter}="@getDepthFilter"
+             {{#if isAdminPage}} class="twc-admin" {{/if}}
   ></tree-view>
-
+{{^if isAdminPage}}
   <div class="tree-footer flex-box">
     {{^if noResults}}
       <tree-pagination {paging}="pageInfo" placement="top"></tree-pagination>
     {{/if}}
   </div>
+{{/if}}
 </div>

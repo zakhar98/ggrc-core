@@ -15,6 +15,7 @@ import {
 } from '../../plugins/utils/current-page-utils';
 import childModelsMap from './child-models-map';
 import tracker from '../../tracker';
+import CustomAttributeDefinition from '../../models/custom-attributes/custom-attribute-definition';
 
 const viewModel = can.Map.extend({
   define: {
@@ -71,7 +72,11 @@ const viewModel = can.Map.extend({
       type: Boolean,
       set: function (newValue, setValue) {
         let isReady = this.attr('dataIsReady');
-
+        if (!this.parent.type && newValue) {
+          setValue(newValue);
+          this.loadCustomAttrs();
+          return;
+        }
         if (!isReady && newValue) {
           if (!this.attr('childModels')) {
             this.initializeChildModels();
@@ -135,6 +140,24 @@ const viewModel = can.Map.extend({
   expandNotDirectlyRelated: function () {
     let isExpanded = this.attr('notDirectlyExpanded');
     this.attr('notDirectlyExpanded', !isExpanded);
+  },
+
+  loadCustomAttrs: function () {
+    let that = this;
+
+    this.attr('loading', true);
+    let customAttrs = CustomAttributeDefinition.findAll({
+      definition_type: this.parent.root_object,
+      definition_id: null,
+    }).pipe(function (mappings) {
+      can.each(mappings, function (entry, i) {
+        let _class = (can.getObject('CMS.Models.' + entry.type) ||
+        can.getObject('GGRC.Models.' + entry.type));
+        mappings[i] = new _class({id: entry.id});
+      });
+      that.attr('directlyItems', mappings);
+      that.attr('loading', false);
+    });
   },
   /**
    *
@@ -220,6 +243,9 @@ const events = {
   },
   [`{viewModel.parent} ${REFRESH_SUB_TREE.type}`]() {
     this.viewModel.refreshItems();
+  },
+  '.add-ca modal:success': function (el, ev, model) {
+    this.viewModel.loadCustomAttrs();
   },
 };
 

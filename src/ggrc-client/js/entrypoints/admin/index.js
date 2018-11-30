@@ -17,6 +17,7 @@ import '../../components/global-custom-attributes/global-custom-attributes';
 import '../../components/inline/inline';
 import '../../components/inline/base-inline-control-title';
 import '../../components/page-header/page-header';
+import '../../components/tree/tree-widget-container';
 
 import '../../common-handlers';
 

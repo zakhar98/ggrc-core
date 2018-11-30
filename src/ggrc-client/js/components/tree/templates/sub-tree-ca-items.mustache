@@ -1,0 +1,53 @@
+<div class="sub-tree-ca">
+    <div class="row-fluid sub-tree-ca__columns">
+        <div class="span5">
+          Attribute name
+        </div>
+        <div class="span3">
+            Attribute type
+        </div>
+        <div class="span2">
+            Mandatory
+        </div>
+        <div class="span2">
+            Edit
+        </div>
+    </div>
+    {{#directlyItems}}
+        <div class="row-fluid sub-tree-ca__row">
+            <div class="span5">
+                {{title}}
+            </div>
+            <div class="span3">
+                {{attribute_type}}
+            </div>
+            <div class="span2">
+                {{#if mandatory}}
+                    Yes
+                {{else}}
+                    No
+                {{/if}}
+            </div>
+            <div class="span2 sub-tree-ca__actions">
+                <a href="javascript://" data-toggle="modal-ajax-form"
+                data-modal-reset="reset" data-object-singular="CustomAttributeDefinition"
+                data-object-plural="custom_attribute_definitions" data-object-id="{{id}}">
+                <i class="fa fa-pencil-square-o"></i>
+                Edit
+            </a>
+            </div>
+        </div>
+    {{/directlyItems}}
+    {{parent.type}}
+    <div class="row-fluid sub-tree-ca__row">
+        <div class="span1">
+            <a href="javascript://" data-toggle="modal-ajax-form"
+            class="btn btn-small btn-white add-ca" rel="tooltip" data-placement="right"
+            data-object-title="Facility" data-object-singular="CustomAttributeDefinition"
+            data-object-plural="custom_attribute_definitions" data-object-params='{ "definition_type": "{{parent.root_object}}", "modal_title": "Add Attribute to type {{parent.title_singular}}" }'
+            data-original-title="Add Attribute">
+            <i class="fa fa-plus-circle" data-test-id="button_add-86eaf948"></i>
+            </a>
+        </div>
+    </div>
+</div>

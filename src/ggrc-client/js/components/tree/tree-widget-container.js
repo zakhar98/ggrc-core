@@ -6,6 +6,7 @@
 import './tree-header-selector';
 import './sub-tree-expander';
 import './sub-tree-wrapper';
+import './sub-tree-ca-items';
 import './sub-tree-item';
 import './sub-tree-models';
 import './tree-item-extra-info';
@@ -127,6 +128,12 @@ viewModel = can.Map.extend({
         return this.attr('options').parent_instance;
       },
     },
+    isAdminPage: {
+      type: Boolean,
+      get: function () {
+        return GGRC.pageType === 'ADMIN';
+      },
+    },
     noResults: {
       type: Boolean,
       get: function () {
@@ -202,29 +209,39 @@ viewModel = can.Map.extend({
     }
 
     let loadSnapshots = this.attr('options.objectVersion');
-    return TreeViewUtils
-      .loadFirstTierItems(
-        modelName,
-        parent,
-        page,
-        filter,
-        request,
-        loadSnapshots)
-      .then((data) => {
-        const total = data.total;
+    if (modelName !== 'CustomAttributable') {
+      return TreeViewUtils
+        .loadFirstTierItems(
+          modelName,
+          parent,
+          page,
+          filter,
+          request,
+          loadSnapshots)
+        .then((data) => {
+          const total = data.total;
 
-        this.attr('showedItems', data.values);
-        this.attr('pageInfo.total', total);
-        this.attr('pageInfo.disabled', false);
-        this.attr('loading', false);
+          this.attr('showedItems', data.values);
+          this.attr('pageInfo.total', total);
+          this.attr('pageInfo.disabled', false);
+          this.attr('loading', false);
 
-        if (!this._getFilterByName('custom') &&
-          !this._getFilterByName('status') &&
-          total !== getCounts().attr(countsName)) {
-          getCounts().attr(countsName, total);
-        }
-      })
-      .then(stopFn, stopFn.bind(null, true));
+          if (!this._getFilterByName('custom') &&
+            !this._getFilterByName('status') &&
+            total !== getCounts().attr(countsName)) {
+            getCounts().attr(countsName, total);
+          }
+        })
+        .then(stopFn, stopFn.bind(null, true));
+    }
+    let mdata = businessModels[modelName].findAll().then((data) => {
+      let dataArr = Array.from(data);
+      this.attr('showedItems', dataArr);
+      this.attr('pageInfo.total', data.length);
+      this.attr('pageInfo.disabled', false);
+      this.attr('loading', false);
+    });
+    return can.Deferred().resolve(mdata);
   },
   display: function (needToRefresh) {
     let loadedItems;
@@ -248,6 +265,9 @@ viewModel = can.Map.extend({
     this.attr('columns.selected', columns.selected);
     this.attr('columns.mandatory', columns.mandatory);
     this.attr('columns.disableConfiguration', columns.disableConfiguration);
+    if (this.attr('isAdminPage')) {
+      this.attr('columns.disableConfiguration', true);
+    }
   },
   setSortingConfiguration: function () {
     let sortingInfo = TreeViewUtils

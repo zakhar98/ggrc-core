@@ -48,6 +48,11 @@ export default can.Map.extend({
         break;
     }
 
+    if (!instance.type) {
+      this.attr('expanded', !this.attr('expanded'));
+      return;
+    }
+
     this.select($element);
   },
   collapseAndHighlightItem: function () {
