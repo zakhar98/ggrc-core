@@ -468,14 +468,23 @@ export default can.Component.extend({
      *   revision diff comparison pane
      */
     highlightCustomRoles: function ($target) {
+      let $roleBlocksOld;
+      let $roleBlocksNew;
       let HIGHLIGHT_CLASS = 'diff-highlighted';
 
       let $rolesPanes = $target
         .find('related-people-access-control');
-      let $roleBlocksOld = $rolesPanes.eq(0)
-        .find('related-people-access-control-group');
-      let $roleBlocksNew = $rolesPanes.eq(1)
-        .find('related-people-access-control-group');
+      if (this.attr('instance.type') === 'Program') {
+        $roleBlocksOld = $rolesPanes.eq(0).add($rolesPanes.eq(1))
+          .find('related-people-access-control-group');
+        $roleBlocksNew = $rolesPanes.eq(2).add($rolesPanes.eq(3))
+          .find('related-people-access-control-group');
+      } else {
+        $roleBlocksOld = $rolesPanes.eq(0)
+          .find('related-people-access-control-group');
+        $roleBlocksNew = $rolesPanes.eq(1)
+          .find('related-people-access-control-group');
+      }
 
       $roleBlocksOld.each((i) => {
         let $blockOld = $roleBlocksOld.eq(i);

@@ -81,18 +81,27 @@
                 {{> /static/templates/custom_attributes/info.stache}}
               </div><!-- custom-attr-wrap end -->
             </div>
+            {{^if isRevision}}
             <div class="info-pane__sidebar">
               <div class="info-pane__section-title">Responses/Comments</div>
-              <comments-section class="flex-box flex-col"
-                {instance}="{instance}"
-                {notification}="'Notify Contacts'">
-              </comments-section>
+                <comments-section class="flex-box flex-col"
+                  {instance}="{instance}"
+                  {notification}="'Notify Contacts'">
+                </comments-section>
+              </div>
             </div>
-          </div>
+            {{/if}}
         </tab-panel>
-        <tab-panel tab-id="change-log" {(panels)}="{panels}" {title-text}="'Change Log'">
-          <revision-log {instance}="{instance}" {options}="{tabOptions}"></revision-log>
-        </tab-panel>
+        {{^if isRevision}}
+          <tab-panel {(panels)}="{panels}" {title-text}="'Version History'">
+            <related-revisions {instance}="{instance}"></related-revisions>
+          </tab-panel>
+        {{/if}}
+        {{^if isRevision}}
+          <tab-panel tab-id="change-log" {(panels)}="{panels}" {title-text}="'Change Log'">
+            <revision-log {instance}="{instance}" {options}="{tabOptions}"></revision-log>
+          </tab-panel>
+        {{/if}}
       </tab-container>
     </div><!-- tier-content end -->
 
